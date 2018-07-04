@@ -14,20 +14,20 @@
           </router-link>
         </div>
         <div class="navbar-end">
+          <span v-if="user" class="navbar-item">
+            {{ user.first_name }}
+          </span>
           <span class="navbar-item">
-            <span v-if="user">
-              {{ user.email }}
-            </span>
             <button
               id="qsLoginBtn"
-              class="button is-default"
+              class="button is-dark"
               v-if="!authenticated"
               @click="login">
                 Log In
             </button>
             <button
               id="qsLoginBtn"
-              class="button is-default"
+              class="button is-danger"
               v-else
               @click="logout">
                 Log Out
@@ -68,6 +68,8 @@ export default {
       'idCwcaQgCqO7POm824t_jFqAmZZ1Nehn',
       'lessthanthreegames.auth0.com',
       {
+        autoclose: true,
+        closable: true,
         auth: {
           sso: false,
           redirect: false
@@ -120,12 +122,18 @@ export default {
         this.profile = profile
         this.authenticated = true
 
+        console.log(profile)
+
         localStorage.setItem('accessToken', authResult.accessToken)
 
         if (this.signin) {
           this.fetchUser(profile.email)
         } else if (this.signup) {
-          this.registerUser(profile.email)
+          this.registerUser({
+            first_name: profile.given_name,
+            last_name: profile.family_name,
+            email: profile.email
+          })
         }
       })
     },
@@ -145,19 +153,19 @@ export default {
         }
       })
     },
-    registerUser (email) {
+    registerUser (user) {
       const optimisticResponse = {
         __typename: 'Mutation',
         createUser: {
           __typename: 'User',
           _id: Math.random().toString(36),
-          email
+          ...user
         }
       }
       this.$apollo.mutate({
         mutation: CREATE_USER_QUERY,
         variables: {
-          email
+          user
         },
         update: (store, { data: { createUser } }) => {
           this.user = createUser
