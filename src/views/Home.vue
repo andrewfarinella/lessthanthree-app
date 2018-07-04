@@ -13,7 +13,7 @@
               </div>
               <div class="card-image" v-else>
                 <figure class="image">
-                  <img src="http://via.placeholder.com/450x250" alt="Placeholder image">
+                  <img src="https://via.placeholder.com/450x250" alt="Placeholder image">
                 </figure>
               </div>
               <div class="card-header">
