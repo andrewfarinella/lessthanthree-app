@@ -107,7 +107,7 @@ export default {
     logout () {
       localStorage.removeItem('accessToken')
       this.lock.logout({
-        returnTo: 'http://localhost:8080'
+        returnTo: process.env.VUE_APP_AUTH0_URL
       })
     },
     getAuth0UserInfo (authResult) {
