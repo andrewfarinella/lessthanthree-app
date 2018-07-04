@@ -74,20 +74,12 @@ export default {
   },
 
   mounted () {
-    // axios.post('http://localhost:3000/login', {
-    //   email: 'andrew.farinella@gmail.com',
-    //   password: 'password'
-    // }).then(response => {
-    //   console.log(response)
-    // }).catch(err => {
-    //   console.log(err)
-    // })
   },
 
   methods: {
     async getGames () {
       try {
-        await axios.post('http://localhost:3000/graphql', {
+        await axios.post(process.env.VUE_APP_ROOT_API, {
           query: ALL_GAMES_QUERY
         })
       } catch (e) {

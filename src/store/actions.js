@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const graphQLURL = 'http://localhost:3000/graphql'
+const graphQLURL = process.env.VUE_APP_ROOT_API
 
 const fetchGame = async ({ commit }, id) => {
   try {
