@@ -57,8 +57,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 import {
   ALL_GAMES_QUERY
 } from '@/graphql/'
@@ -73,20 +71,6 @@ export default {
     games: ALL_GAMES_QUERY
   },
 
-  mounted () {
-  },
-
-  methods: {
-    async getGames () {
-      try {
-        await axios.post(process.env.VUE_APP_ROOT_API, {
-          query: ALL_GAMES_QUERY
-        })
-      } catch (e) {
-        console.log(e)
-      }
-    }
-  },
   components: {
     AddNewGame,
     AddGameRating
