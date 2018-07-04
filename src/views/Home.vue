@@ -43,7 +43,7 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" v-if="user">
       <h2 class="title is-12 has-text-white">Add Game</h2>
       <div class="columns">
         <div class="column is-6">
@@ -57,6 +57,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 import {
   ALL_GAMES_QUERY
 } from '@/graphql/'
@@ -69,6 +71,12 @@ export default {
 
   apollo: {
     games: ALL_GAMES_QUERY
+  },
+
+  computed: {
+    ...mapGetters({
+      user: 'user'
+    })
   },
 
   components: {

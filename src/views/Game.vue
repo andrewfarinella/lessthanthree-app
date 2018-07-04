@@ -12,7 +12,7 @@
         </nav>
       </div>
       <div class="columns">
-        <div class="column is-9">
+        <div class="column" :class="{'is-9': user}">
           <div class="box" v-for="rating in game.ratings" :key="rating._id">
             <div class="columns">
               <div class="column">
@@ -54,7 +54,7 @@
             </div>
           </div>
         </div>
-        <div class="column is-3">
+        <div class="column is-3" v-if="user">
           <div class="box">
             <h4 class="title is-4">Add Rating</h4>
             <add-game-rating :game="game" :user="user" />
