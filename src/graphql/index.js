@@ -16,14 +16,18 @@ query UserByEmailQuery($email: String!) {
   ) {
     _id
     email
+    first_name
+    last_name
   }
 }`
 
 const CREATE_USER_QUERY = gql`
-mutation CreateUserQuery($email: String!) {
-  createUser(email: $email) {
+mutation CreateUserQuery($user: UserInput!) {
+  createUser(user: $user) {
     _id
     email
+    first_name
+    last_name
   }
 }`
 
