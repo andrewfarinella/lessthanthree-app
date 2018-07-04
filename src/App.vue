@@ -184,9 +184,4 @@ body, html {
   color: #2c3e50;
 }
 
-.box {
-  box-shadow: inset 0 0 16px 3px rgba(0, 255, 249, 0.48),
-              0 2px 3px rgba(10, 10, 10, 0.1),
-              0 0 0 1px rgba(10, 10, 10, 0.1);
-}
 </style>
