@@ -73,10 +73,7 @@ export default {
         auth: {
           audience: process.env.VUE_APP_ROOT_API,
           sso: false,
-          redirect: false,
-          params: {
-            scope: 'openid email'
-          }
+          redirect: false
         }
       }
     )
