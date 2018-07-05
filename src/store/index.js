@@ -8,12 +8,7 @@ import mutations from './mutations'
 Vue.use(Vuex)
 
 const state = {
-  // Currently selected game
-  game: {},
-
-  // All visible games
-  games: [],
-
+  // Current user
   user: null
 }
 
