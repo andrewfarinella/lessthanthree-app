@@ -71,8 +71,12 @@ export default {
         autoclose: true,
         closable: true,
         auth: {
+          audience: process.env.VUE_APP_ROOT_API,
           sso: false,
-          redirect: false
+          redirect: false,
+          params: {
+            scope: 'openid email'
+          }
         }
       }
     )
@@ -81,12 +85,10 @@ export default {
     this.lock.on('authenticated', this.getAuth0UserInfo)
 
     this.lock.on('signin ready', (authResult) => {
-      console.log('signin')
       this.signin = true
       this.signup = false
     })
     this.lock.on('signup ready', (authResult) => {
-      console.log('signup')
       this.signin = false
       this.signup = true
     })
@@ -122,8 +124,6 @@ export default {
         this.profile = profile
         this.authenticated = true
 
-        console.log(profile)
-
         localStorage.setItem('accessToken', authResult.accessToken)
 
         if (this.signin) {
@@ -132,7 +132,8 @@ export default {
           this.registerUser({
             first_name: profile.given_name,
             last_name: profile.family_name,
-            email: profile.email
+            email: profile.email,
+            sub: profile.sub
           })
         }
       })
