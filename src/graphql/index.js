@@ -6,7 +6,9 @@ query UserQuery($id: ID!) {
   ) {
     _id
     email
-    password
+    first_name
+    last_name
+    role
   }
 }`
 const USER_BY_EMAIL_QUERY = gql`
@@ -18,6 +20,7 @@ query UserByEmailQuery($email: String!) {
     email
     first_name
     last_name
+    role
   }
 }`
 

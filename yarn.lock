@@ -718,6 +718,16 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
+"@casl/ability@^2.4.2":
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/@casl/ability/-/ability-2.4.2.tgz#16a161b4895281ecd678739e955dad99e394896b"
+  dependencies:
+    sift "^6.0.0"
+
+"@casl/vue@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@casl/vue/-/vue-0.4.2.tgz#90d9c0665e82c797f301aedaafb91caffc01d536"
+
 "@cypress/listr-verbose-renderer@0.4.1":
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/@cypress/listr-verbose-renderer/-/listr-verbose-renderer-0.4.1.tgz#a77492f4b11dcc7c446a34b3e28721afd33c642a"
@@ -7954,6 +7964,10 @@ shell-quote@^1.6.1:
 shelljs@^0.6.0:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.6.1.tgz#ec6211bed1920442088fe0f70b2837232ed2c8a8"
+
+sift@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/sift/-/sift-6.0.0.tgz#f93a778e5cbf05a5024ebc391e6b32511a6d1f82"
 
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"

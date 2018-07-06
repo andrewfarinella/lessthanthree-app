@@ -8,6 +8,8 @@ import { HttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import VueApollo from 'vue-apollo'
+import { abilitiesPlugin } from '@casl/vue'
+import { guestAbilities } from './abilities'
 
 import 'bulma/bulma.sass'
 
@@ -43,6 +45,8 @@ const apolloClient = new ApolloClient({
 
 // Install the vue plugin
 Vue.use(VueApollo)
+
+Vue.use(abilitiesPlugin, guestAbilities)
 
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient

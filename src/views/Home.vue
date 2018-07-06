@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <section class="section">
+    <section class="section" v-if="$can('read', 'Game')">
       <h1 class="title is-1 has-text-white">Games</h1>
       <div class="box">
         <div class="columns is-multiline">
@@ -43,7 +43,7 @@
       </div>
     </section>
 
-    <section class="section" v-if="user">
+    <section class="section" v-if="$can('create', 'Game')">
       <h2 class="title is-12 has-text-white">Add Game</h2>
       <div class="columns">
         <div class="column is-6">
@@ -69,6 +69,11 @@ import AddGameRating from '@/components/AddGameRating'
 export default {
   name: 'home',
 
+  components: {
+    AddNewGame,
+    AddGameRating
+  },
+
   apollo: {
     games: ALL_GAMES_QUERY
   },
@@ -77,11 +82,6 @@ export default {
     ...mapGetters({
       user: 'user'
     })
-  },
-
-  components: {
-    AddNewGame,
-    AddGameRating
   }
 }
 </script>

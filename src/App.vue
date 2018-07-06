@@ -50,6 +50,10 @@ import {
   CREATE_USER_QUERY
 } from '@/graphql'
 
+import {
+  abilities
+} from './abilities.js'
+
 import { Auth0Lock } from 'auth0-lock'
 
 export default {
@@ -148,6 +152,9 @@ export default {
         update: (data) => {
           this.$store.dispatch('updateUser', data.userByEmail)
           return data.userByEmail
+        },
+        result: ({ data }) => {
+          this.$ability.update(abilities(data.userByEmail))
         }
       })
     },

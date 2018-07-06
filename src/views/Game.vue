@@ -12,7 +12,7 @@
         </nav>
       </div>
       <div class="columns">
-        <div class="column" :class="{'is-9': user}">
+        <div class="column" :class="{'is-9': $can('create', 'Rating')}">
           <div class="box" v-for="rating in game.ratings" :key="rating._id">
             <div class="columns">
               <div class="column">
@@ -31,7 +31,7 @@
                       <div class="column">
                         {{ vote.user.email }} | {{ vote.value }}
                       </div>
-                      <div class="column has-text-right">
+                      <div class="column has-text-right" v-if="$can('delete', vote)">
                         <button class="button is-danger" @click="removeVote(game._id, rating._id, vote._id)">Remove</button>
                       </div>
                     </div>
@@ -54,7 +54,7 @@
             </div>
           </div>
         </div>
-        <div class="column is-3" v-if="user">
+        <div class="column is-3" v-if="$can('create', 'Rating')">
           <div class="box">
             <h4 class="title is-4">Add Rating</h4>
             <add-game-rating :game="game" :user="user" />
