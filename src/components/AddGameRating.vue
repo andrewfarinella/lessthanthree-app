@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="field">
-      <label class="label">Name</label>
+      <label class="label has-text-white">Name</label>
       <input type="text" class="input" v-model="name">
     </div>
     <div class="field">
-      <label class="label">Value</label>
+      <label class="label has-text-white">Value</label>
       <input type="text" class="input" v-model="value" placeholder="98">
     </div>
     <button class="button is-info" @click="save">Add</button>

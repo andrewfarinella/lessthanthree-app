@@ -223,16 +223,32 @@ body, html {
   min-height: 100%;
   height: 100%;
   overflow: scroll;
-  background-color: #1a1f25;
+  background-color: black;
+  background-image: url('/img/footer_lodyas.png');
 }
 #app {
+  position: relative;
+  z-index: 1;
   min-height: 100%;
   display: flex;
   flex-direction: column;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  color: white;
+}
+#app::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+
+  display: block;
+  background: rgb(255,255,255);
+  background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,1) 400px);
 }
 
 </style>

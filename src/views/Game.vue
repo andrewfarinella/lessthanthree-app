@@ -3,11 +3,11 @@
     <div class="container">
       <section class="section">
         <h1 class="title is-1 has-text-white">{{ game.name }}</h1>
-        <div class="box">
+        <div class="box has-background-black-ter">
           <nav class="breadcrumb" aria-label="breadcrumbs">
             <ul>
-              <li><router-link to="/">Home</router-link></li>
-              <li class="is-active"><a aria-current="page">{{ game.name }}</a></li>
+              <li><router-link to="/" class="has-text-white">Home</router-link></li>
+              <li class="is-active"><a aria-current="page" class="has-text-grey">{{ game.name }}</a></li>
             </ul>
           </nav>
         </div>

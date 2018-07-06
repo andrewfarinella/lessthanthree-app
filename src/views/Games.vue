@@ -2,9 +2,9 @@
   <div class="container">
     <section class="section" v-if="$can('read', 'Game')">
       <h1 class="title is-1 has-text-white">Games</h1>
-      <div class="box">
-        <div class="columns is-multiline">
-          <div class="column is-4" v-for="game in games" :key="game._id">
+      <div class="columns is-multiline">
+        <div class="column is-4" v-for="game in games" :key="game._id">
+          <div class="box has-background-black-ter has-text-white">
             <router-link :to="`/game/${game._id}`" class="card">
               <div class="card-image" v-if="game.banner">
                 <figure class="image">
@@ -17,7 +17,7 @@
                 </figure>
               </div>
               <div class="card-header">
-                <p class="card-header-title">{{ game.name }}</p>
+                <p class="card-header-title has-text-white">{{ game.name }}</p>
               </div>
               <div class="card-content">
                 <div class="field is-grouped is-grouped-multiline">
@@ -27,14 +27,14 @@
                       <span class="tag is-primary">{{ rating.value | round }}</span>
                     </div>
                   </div>
-                  <div class="control" v-if="game.ratings.length > 2">
+                  <div class="control has-text-white" v-if="game.ratings.length > 2">
                     ...
                   </div>
                 </div>
               </div>
               <footer class="card-footer">
                 <div class="card-footer-item">
-                  <small class="has-text-left">{{ game.ratings.length }} rating(s)</small>
+                  <small class="has-text-left has-text-white">{{ game.ratings.length }} rating(s)</small>
                 </div>
               </footer>
             </router-link>

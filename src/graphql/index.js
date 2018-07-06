@@ -156,6 +156,8 @@ mutation($id: ID!, $rating: RatingInput!) {
           _id
           email
           name
+          first_name
+          last_name
         }
         value
       }
@@ -182,6 +184,8 @@ mutation($ratingId: ID!, $vote: VoteInput!) {
           _id
           email
           name
+          first_name
+          last_name
         }
         value
       }
