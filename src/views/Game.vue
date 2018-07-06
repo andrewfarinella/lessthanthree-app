@@ -48,6 +48,12 @@ export default {
     ...mapGetters({
       user: 'user'
     })
+  },
+
+  mounted () {
+    this.$apollo.queries.game.refetch({
+      id: this.$route.params.id
+    })
   }
 }
 </script>

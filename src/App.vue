@@ -14,9 +14,14 @@
           </router-link>
         </div>
         <div class="navbar-end">
-          <span v-if="user" class="navbar-item">
-            {{ user.first_name }}
-          </span>
+          <router-link v-if="user" to="/profile" class="navbar-item">
+            <span v-if="user && user.picture">
+              <img :src="user.picture" alt="" class="image is-24x24 is-rounded" style="border-radius: 50%; margin-right: 0.5em;">
+            </span>
+            <span>
+              {{ user.first_name }}
+            </span>
+          </router-link>
           <span class="navbar-item">
             <button
               id="qsLoginBtn"
@@ -39,7 +44,7 @@
         </div>
       </div>
     </nav>
-    <router-view>
+    <router-view :key="$route.fullPath">
     </router-view>
   </div>
 </template>
@@ -55,6 +60,8 @@ import {
 } from './abilities.js'
 
 import { Auth0Lock } from 'auth0-lock'
+import { HttpLink } from 'apollo-link-http'
+import { setContext } from 'apollo-link-context'
 
 export default {
   data () {
@@ -118,7 +125,7 @@ export default {
     getAuth0UserInfo (authResult) {
       this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
         if (error) {
-          // Handle error
+          localStorage.removeItem('accessToken')
           return
         }
 
@@ -137,6 +144,34 @@ export default {
             sub: profile.sub
           })
         }
+      })
+    },
+    updateAuthTokens () {
+      this.lock.checkSession({}, (err, result) => {
+        console.log(err, result)
+
+        localStorage.setItem('accessToken', result.accessToken)
+
+        const httpLink = new HttpLink({
+          // You should use an absolute URL here
+          uri: process.env.VUE_APP_ROOT_API
+        })
+
+        const authLink = setContext((_, { headers }) => {
+          // get the authentication token from local storage if it exists
+          const token = localStorage.getItem('accessToken')
+          // return the headers to the context so httpLink can read them
+          return {
+            headers: {
+              ...headers,
+              authorization: token ? `Bearer ${token}` : ''
+            }
+          }
+        })
+
+        this.$apollo.link = authLink.concat(httpLink)
+        debugger
+        this.getAuth0UserInfo(result)
       })
     },
     fetchUser (email) {

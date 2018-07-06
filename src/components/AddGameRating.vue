@@ -52,7 +52,6 @@ export default {
         update: (store, { data: { addGameRating } }) => {
           const data = store.readQuery({ query: GAME_QUERY, variables: { id: addGameRating._id } })
           data.game = addGameRating
-          console.log(data.game)
           store.writeQuery({
             query: GAME_QUERY,
             data,

@@ -46,7 +46,6 @@ export default {
       this.$apollo.mutate({
         mutation: ADD_VOTE_QUERY,
         variables: {
-          gameId: this.game._id,
           ratingId: this.ratingId,
           vote: {
             user: this.user._id,
@@ -54,13 +53,13 @@ export default {
           }
         },
         update: (store, { data: { addRatingVote } }) => {
-          const data = store.readQuery({ query: GAME_QUERY, variables: { id: addRatingVote._id } })
+          const data = store.readQuery({ query: GAME_QUERY, variables: { id: this.game._id } })
           data.game = addRatingVote
           store.writeQuery({
             query: GAME_QUERY,
             data,
             variables: {
-              id: addRatingVote._id
+              id: this.game._id
             }
           })
         },

@@ -11,12 +11,25 @@ import VueApollo from 'vue-apollo'
 import { abilitiesPlugin } from '@casl/vue'
 import { guestAbilities } from './abilities'
 
+// Style imports
 import 'bulma/bulma.sass'
+
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faEdit)
 
 Vue.config.productionTip = false
 
 Vue.filter('round', (value) => {
   return Math.round(value)
+})
+
+Vue.filter('firstInitial', (str) => {
+  if (typeof str !== 'string' || str === '') {
+    return ''
+  }
+  return str.charAt(0).toUpperCase() + '.'
 })
 
 const httpLink = new HttpLink({

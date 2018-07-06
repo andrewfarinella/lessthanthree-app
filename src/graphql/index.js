@@ -6,8 +6,10 @@ query UserQuery($id: ID!) {
   ) {
     _id
     email
+    name
     first_name
     last_name
+    picture
     role
   }
 }`
@@ -19,8 +21,10 @@ query UserByEmailQuery($email: String!) {
   ) {
     _id
     email
+    name
     first_name
     last_name
+    picture
     role
   }
 }`
@@ -30,6 +34,7 @@ mutation CreateUserQuery($user: UserInput!) {
   createUser(user: $user) {
     _id
     email
+    name
     first_name
     last_name
   }
@@ -48,6 +53,7 @@ const ALL_GAMES_QUERY = gql`{
         user {
           _id
           email
+          name
         }
         value
       }
@@ -72,6 +78,9 @@ query GameQuery($id: ID!) {
         user {
           _id
           email
+          name
+          first_name
+          last_name
         }
         value
       }
@@ -95,6 +104,7 @@ const ADD_GAME_QUERY = gql`mutation($name: String!, $ratings: [RatingInput]) {
         user {
           _id
           email
+          name
         }
         value
       }
@@ -119,6 +129,7 @@ const UPDATE_GAME_QUERY = gql`mutation($id: ID!, $game: GameInput) {
         user {
           _id
           email
+          name
         }
         value
       }
@@ -144,6 +155,7 @@ mutation($id: ID!, $rating: RatingInput!) {
         user {
           _id
           email
+          name
         }
         value
       }
@@ -152,9 +164,8 @@ mutation($id: ID!, $rating: RatingInput!) {
 }`
 
 const ADD_VOTE_QUERY = gql`
-mutation($gameId: ID!, $ratingId: ID!, $vote: VoteInput!) {
+mutation($ratingId: ID!, $vote: VoteInput!) {
   addRatingVote(
-    gameId: $gameId,
     ratingId: $ratingId,
     vote: $vote
   ) {
@@ -170,6 +181,7 @@ mutation($gameId: ID!, $ratingId: ID!, $vote: VoteInput!) {
         user {
           _id
           email
+          name
         }
         value
       }
@@ -178,9 +190,8 @@ mutation($gameId: ID!, $ratingId: ID!, $vote: VoteInput!) {
 }`
 
 const REMOVE_VOTE_QUERY = gql`
-mutation($gameId: ID!, $ratingId: ID!, $voteId: ID!) {
+mutation($ratingId: ID!, $voteId: ID!) {
   removeRatingVote(
-    gameId: $gameId,
     ratingId: $ratingId,
     voteId: $voteId
   ) {
@@ -196,13 +207,36 @@ mutation($gameId: ID!, $ratingId: ID!, $voteId: ID!) {
         user {
           _id
           email
+          name
         }
         value
       }
     }
   }
-}
-`
+}`
+
+const VOTES_BY_USER_QUERY = gql`
+query votesByUserQuery($id: ID!) {
+  votesByUser(id: $id) {
+    _id
+    name
+    banner
+    ratings {
+      _id
+      name
+      value
+      votes {
+        _id
+        user {
+          _id
+          email
+          name
+        }
+        value
+      }
+    }
+  }
+}`
 
 export {
   USER_QUERY,
@@ -214,5 +248,6 @@ export {
   UPDATE_GAME_QUERY,
   ADD_GAME_RATING_QUERY,
   ADD_VOTE_QUERY,
-  REMOVE_VOTE_QUERY
+  REMOVE_VOTE_QUERY,
+  VOTES_BY_USER_QUERY
 }

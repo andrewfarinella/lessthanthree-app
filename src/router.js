@@ -4,7 +4,8 @@ import Games from './views/Games.vue'
 import Game from './views/Game.vue'
 import GameSingle from './views/GameSingle.vue'
 import GameEdit from './views/GameEdit.vue'
-import About from './views/About.vue'
+import Profile from './views/Profile.vue'
+import ProfileSingle from './views/ProfileSingle.vue'
 import AuthCallback from './components/AuthCallback.vue'
 
 Vue.use(Router)
@@ -34,9 +35,20 @@ export default new Router({
       ]
     },
     {
-      path: '/about',
-      name: 'about',
-      component: About
+      path: '/profile',
+      component: Profile,
+      children: [
+        {
+          path: '',
+          name: 'profile.me',
+          component: ProfileSingle
+        },
+        {
+          path: ':id',
+          name: 'profile.show',
+          component: ProfileSingle
+        }
+      ]
     },
     {
       path: '/callback',

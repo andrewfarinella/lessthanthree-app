@@ -33,10 +33,10 @@ export default {
 
   data () {
     return {
-      name: 'Chrono Trigger',
+      name: '',
       rating: {
-        name: 'Story',
-        value: 96
+        name: '',
+        value: null
       }
     }
   },
