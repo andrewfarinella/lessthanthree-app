@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Games from './views/Games.vue'
 import Game from './views/Game.vue'
+import GameSingle from './views/GameSingle.vue'
+import GameEdit from './views/GameEdit.vue'
 import About from './views/About.vue'
 import AuthCallback from './components/AuthCallback.vue'
 
@@ -13,12 +15,23 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Games
     },
     {
       path: '/game/:id',
-      name: 'single-game',
-      component: Game
+      component: Game,
+      children: [
+        {
+          path: '',
+          name: 'game.show',
+          component: GameSingle
+        },
+        {
+          path: 'edit',
+          name: 'game.edit',
+          component: GameEdit
+        }
+      ]
     },
     {
       path: '/about',

@@ -191,6 +191,9 @@ body, html {
   background-color: #1a1f25;
 }
 #app {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

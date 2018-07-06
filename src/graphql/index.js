@@ -11,6 +11,7 @@ query UserQuery($id: ID!) {
     role
   }
 }`
+
 const USER_BY_EMAIL_QUERY = gql`
 query UserByEmailQuery($email: String!) {
   userByEmail(
@@ -91,6 +92,30 @@ const ADD_GAME_QUERY = gql`mutation($name: String!, $ratings: [RatingInput]) {
       name
       value
       votes {
+        user {
+          _id
+          email
+        }
+        value
+      }
+    }
+  }
+}`
+
+const UPDATE_GAME_QUERY = gql`mutation($id: ID!, $game: GameInput) {
+  updateGame(
+    id: $id
+    game: $game
+  ) {
+    _id
+    name
+    banner
+    ratings{
+      _id
+      name
+      value
+      votes {
+        _id
         user {
           _id
           email
@@ -186,6 +211,7 @@ export {
   ALL_GAMES_QUERY,
   GAME_QUERY,
   ADD_GAME_QUERY,
+  UPDATE_GAME_QUERY,
   ADD_GAME_RATING_QUERY,
   ADD_VOTE_QUERY,
   REMOVE_VOTE_QUERY

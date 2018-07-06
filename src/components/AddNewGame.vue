@@ -87,7 +87,7 @@ export default {
           optimisticResponse
         })
       } catch (e) {
-        console.log(e)
+        console.error(e)
       }
     }
   }
