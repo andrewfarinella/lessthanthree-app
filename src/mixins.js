@@ -2,7 +2,6 @@ const valueColorClass = {
   methods: {
     getRatingValueClass (value, context) {
       value = parseInt(value)
-      console.log(value < 50)
       context = context || 'text'
 
       if (context === 'text') {

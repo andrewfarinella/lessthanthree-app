@@ -113,6 +113,12 @@ export default {
     }
   },
 
+  mounted () {
+    this.$nextTick(() => {
+      this.updateMasonry()
+    })
+  },
+
   watch: {
     game () {
       this.$nextTick(() => {

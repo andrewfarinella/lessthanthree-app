@@ -151,8 +151,6 @@ export default {
     },
     updateAuthTokens () {
       this.lock.checkSession({}, (err, result) => {
-        console.log(err, result)
-
         localStorage.setItem('accessToken', result.accessToken)
 
         const httpLink = new HttpLink({
