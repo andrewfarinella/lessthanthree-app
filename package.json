@@ -28,6 +28,7 @@
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
     "i": "^0.3.6",
+    "masonry-layout": "^4.2.2",
     "npm": "^6.1.0",
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.16",

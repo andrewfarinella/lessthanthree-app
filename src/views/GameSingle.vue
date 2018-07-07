@@ -2,8 +2,8 @@
   <section class="section">
     <div class="columns">
       <div class="column" :class="{'is-9': user}">
-        <div class="columns is-multiline">
-          <div class="column is-6" v-for="rating in game.ratings" :key="rating._id">
+        <div class="" id="rating-grid">
+          <div class="rating" v-for="rating in game.ratings" :key="rating._id">
             <div class="box rating-box has-background-black-ter">
               <div class="columns">
                 <div class="column">
@@ -80,6 +80,7 @@
 </template>
 
 <script>
+import Masonry from 'masonry-layout'
 import {
   REMOVE_VOTE_QUERY
 } from '@/graphql/'
@@ -106,7 +107,33 @@ export default {
     'user'
   ],
 
+  data () {
+    return {
+      msnry: null
+    }
+  },
+
+  watch: {
+    game () {
+      this.$nextTick(() => {
+        this.updateMasonry()
+      })
+    },
+    user () {
+      this.$nextTick(() => {
+        this.updateMasonry()
+      })
+    }
+  },
+
   methods: {
+    updateMasonry () {
+      const grid = document.getElementById('rating-grid')
+      this.msnry = new Masonry(grid, {
+        itemSelector: '.rating'
+      })
+    },
+
     hasVoted (votes) {
       if (!this.user) {
         return false
@@ -131,6 +158,15 @@ export default {
 <style lang="scss" scoped>
 hr {
   margin: 0.5em 0 1em;
+}
+
+#rating-grid {
+  margin: 0 -1rem;
+}
+
+.rating {
+  width: calc(50% - 2rem);
+  margin: 0 1rem 2rem;
 }
 
 .rating-box {
