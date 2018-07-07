@@ -39,17 +39,25 @@
                     </li>
                   </ul>
                   <div class="columns">
-                    <div class="column is-6">
-                      <template v-if="user">
-                        <add-rating-vote v-if="!hasVoted(rating.votes)" :game="game" :rating-id="rating._id" :user="user" />
-                        <p v-else class="has-text-white">
-                          You have already voted.
-                        </p>
+                    <template v-if="user">
+                      <template v-if="!hasVoted(rating.votes)">
+                        <div class="column is-6">
+                          <add-rating-vote :game="game" :rating-id="rating._id" :user="user" />
+                        </div>
                       </template>
                       <template v-else>
-                        Log-in to cast your own vote!
+                        <div class="column is-12">
+                          <p class="has-text-white">
+                            You have already voted.
+                          </p>
+                        </div>
                       </template>
-                    </div>
+                    </template>
+                    <template v-else>
+                      <div class="column is-12">
+                        <p>Log-in to cast your own vote!</p>
+                      </div>
+                    </template>
                   </div>
                 </div>
               </div>

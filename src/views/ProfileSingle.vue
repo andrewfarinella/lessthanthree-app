@@ -101,9 +101,11 @@ export default {
   },
 
   mounted () {
-    this.$apollo.queries.votesByUser.refetch({
-      id: this.profile._id
-    })
+    if (this.profile) {
+      this.$apollo.queries.votesByUser.refetch({
+        id: this.profile._id
+      })
+    }
   }
 }
 </script>

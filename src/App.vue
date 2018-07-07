@@ -14,14 +14,26 @@
           </router-link>
         </div>
         <div class="navbar-end">
-          <router-link v-if="user" to="/profile" class="navbar-item">
-            <span v-if="user && user.picture">
-              <img :src="user.picture" alt="" class="image is-24x24 is-rounded" style="border-radius: 50%; margin-right: 0.5em;">
-            </span>
-            <span>
-              {{ user.first_name }}
-            </span>
-          </router-link>
+          <on-click-outside :do="() => { userDropDownActive = false }">
+            <div class="navbar-item" :class="{'is-active': userDropDownActive}">
+              <span v-if="user" class="navbar-link" @click="userDropDownActive = !userDropDownActive">
+                <span v-if="user && user.picture">
+                  <img :src="user.picture" alt="" class="image is-24x24 is-rounded" style="border-radius: 50%; margin-right: 0.5em;">
+                </span>
+                <span>
+                  {{ user.first_name }}
+                </span>
+              </span>
+              <div class="navbar-dropdown" @click="userDropDownActive = !userDropDownActive">
+                <router-link to="/profile" class="navbar-item">
+                  <span class="icon"><i class="fas fa-user"></i></span> <span>Profile</span>
+                </router-link>
+                <a class="navbar-item" @click="logout">
+                  <span class="icon"><i class="fas fa-sign-out-alt"></i></span> <span>Log Out</span>
+                </a>
+              </div>
+          </div>
+          </on-click-outside>
           <span class="navbar-item">
             <button
               id="qsLoginBtn"
@@ -29,13 +41,6 @@
               v-if="!authenticated"
               @click="login">
                 Log In
-            </button>
-            <button
-              id="qsLoginBtn"
-              class="button is-danger"
-              v-else
-              @click="logout">
-                Log Out
             </button>
           </span>
 
@@ -61,11 +66,15 @@ import {
   abilities
 } from './abilities.js'
 
+import OnClickOutside from '@/components/OnClickOutside'
+
 import { Auth0Lock } from 'auth0-lock'
-import { HttpLink } from 'apollo-link-http'
-import { setContext } from 'apollo-link-context'
 
 export default {
+  components: {
+    OnClickOutside
+  },
+
   data () {
     return {
       profile: null,
@@ -73,7 +82,8 @@ export default {
       authenticated: false,
       user: null,
       signin: true,
-      signup: false
+      signup: false,
+      userDropDownActive: false
     }
   },
   created () {
@@ -147,32 +157,6 @@ export default {
             picture: profile.picture
           })
         }
-      })
-    },
-    updateAuthTokens () {
-      this.lock.checkSession({}, (err, result) => {
-        localStorage.setItem('accessToken', result.accessToken)
-
-        const httpLink = new HttpLink({
-          // You should use an absolute URL here
-          uri: process.env.VUE_APP_ROOT_API
-        })
-
-        const authLink = setContext((_, { headers }) => {
-          // get the authentication token from local storage if it exists
-          const token = localStorage.getItem('accessToken')
-          // return the headers to the context so httpLink can read them
-          return {
-            headers: {
-              ...headers,
-              authorization: token ? `Bearer ${token}` : ''
-            }
-          }
-        })
-
-        this.$apollo.link = authLink.concat(httpLink)
-        debugger
-        this.getAuth0UserInfo(result)
       })
     },
     fetchUser (email) {
