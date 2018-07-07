@@ -1,18 +1,18 @@
 <template>
   <div>
     <div class="field">
-      <label class="label" for="name">Game Name</label>
+      <label class="label has-text-white" for="name">Game Name</label>
       <input type="text" class="input" id="name" name="name" v-model="name">
     </div>
 
     <div class="field">
       <div class="columns">
         <div class="column">
-          <label for="rating.name" class="label">Name</label>
+          <label for="rating.name" class="label has-text-white">Name</label>
           <input type="text" class="input" name="rating.name" id="rating.name" v-model="rating.name">
         </div>
         <div class="column">
-          <label for="rating.value" class="label">Value</label>
+          <label for="rating.value" class="label has-text-white">Value</label>
           <input type="text" class="input" name="rating.value" id="rating.value" v-model="rating.value">
         </div>
       </div>

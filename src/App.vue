@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav class="navbar is-danger">
+    <nav class="navbar is-danger is-fixed-top">
       <div class="navbar-brand has-text-white">
         <router-link class="navbar-item" to="/">
           <strong>&lt;3 Games</strong>
@@ -44,8 +44,10 @@
         </div>
       </div>
     </nav>
-    <router-view :key="$route.fullPath">
-    </router-view>
+    <transition name="page">
+      <router-view :key="$route.fullPath" class="page">
+      </router-view>
+    </transition>
   </div>
 </template>
 
@@ -141,7 +143,8 @@ export default {
             first_name: profile.given_name,
             last_name: profile.family_name,
             email: profile.email,
-            sub: profile.sub
+            sub: profile.sub,
+            picture: profile.picture
           })
         }
       })
@@ -229,17 +232,19 @@ body, html {
 #app {
   position: relative;
   z-index: 1;
+  overflow: auto;
   min-height: 100%;
   display: flex;
   flex-direction: column;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding-top: 2rem;
   color: white;
 }
 #app::before {
   content: "";
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
@@ -251,4 +256,48 @@ body, html {
   background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,1) 400px);
 }
 
+.box,
+.navbar {
+  box-shadow: 0 2px 30px rgba(10, 10, 10, 0.4), 0 0 0 1px rgba(10, 10, 10, 0.1) !important;
+}
+input.input {
+    background-color: rgba(0,0,0,0.2);
+    color: white;
+    border-color: rgba(255,255,255,0.3);
+}
+ul.menu-list a:hover {
+  background-color: rgba(0,0,0,0.5);
+}
+.button:not(.is-outlined) {
+  border: 0;
+}
+.tag.is-primary,
+.button.is-primary {
+  background: linear-gradient(128deg, rgba(0,209,178,1) 0%, rgba(0,157,209,1) 100%);
+}
+.tag.is-info,
+.button.is-info {
+  background: linear-gradient(128deg, rgba(32,156,238,1) 0%, rgba(32,48,238,1) 100%);
+}
+.tag.is-warning,
+.button.is-warning {
+  background: linear-gradient(127deg, rgba(255,221,87,1) 0%, rgba(255,150,61,1) 100%);
+}
+.tag.is-danger,
+.button.is-danger {
+  background: linear-gradient(128deg, rgba(255,56,182,1) 0%, rgba(255,56,96,1) 100%);
+}
+
+.page {
+  position: absolute !important;
+  width: 100%;
+  overflow: auto;
+}
+
+.page-enter-active, .page-leave-active {
+  transition: opacity 0.25s;
+}
+.page-enter, .page-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
 </style>

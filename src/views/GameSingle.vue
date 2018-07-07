@@ -19,8 +19,13 @@
                   <ul v-if="rating.votes">
                     <li v-for="vote in rating.votes" :key="vote._id">
                       <div class="columns is-marginless" style="align-items: center">
-                        <div class="column is-9 is-paddingless">
-                          <strong :class="getRatingValueClass(vote.value)">{{ vote.value }} </strong> <small><router-link :to="{ name: 'profile.show', params: { id: vote.user._id }}" class="has-text-white">{{ vote.user.first_name }} {{ vote.user.last_name | firstInitial }}</router-link></small>
+                        <div class="column is-1 is-paddingless">
+                          <strong class="is-size-4" :class="getRatingValueClass(vote.value)">{{ vote.value }} </strong>
+                        </div>
+                        <div class="column is-8 is-paddingless">
+                          <router-link :to="{ name: 'profile.show', params: { id: vote.user._id }}" class="has-text-white is-flex" style="align-items: center;">
+                            <img :src="vote.user.picture" class="image is-16x16" style="border-radius: 50%; margin-right: 5px;" :alt="vote.user.name">
+                          </router-link>
                         </div>
                         <div class="column is-3 is-paddingless has-text-right" v-if="$can('delete', vote)">
                           <button class="button is-small is-text" @click="removeVote(game._id, rating._id, vote._id)">
@@ -57,13 +62,13 @@
           <h4 class="title is-4 has-text-white">Add Rating</h4>
           <add-game-rating :game="game" :user="user" />
         </div>
-        <div class="box" v-if="$can('update', 'Game')">
+        <div class="box has-background-black-bis" v-if="$can('update', 'Game')">
           <aside class="menu">
             <p class="menu-label">
               General
             </p>
             <ul class="menu-list">
-              <li><router-link :to="{ name: 'game.edit', params: { id: game._id }}">Edit</router-link></li>
+              <li><router-link :to="{ name: 'game.edit', params: { id: game._id }}" class="has-text-white">Edit</router-link></li>
               <li v-if="$can('delete', 'Game')"><a class="has-text-danger">Delete</a></li>
             </ul>
           </aside>
@@ -82,11 +87,19 @@ import {
 import AddGameRating from '@/components/AddGameRating'
 import AddRatingVote from '@/components/AddRatingVote'
 
+import {
+  valueColorClass
+} from '@/mixins'
+
 export default {
   components: {
     AddRatingVote,
     AddGameRating
   },
+
+  mixins: [
+    valueColorClass
+  ],
 
   props: [
     'game',
@@ -110,22 +123,6 @@ export default {
           voteId
         }
       })
-    },
-
-    getRatingValueClass (value) {
-      switch (value) {
-        case value < 50 :
-          return 'has-text-danger'
-
-        case value < 75 :
-          return 'has-text-warning'
-
-        case value < 90 :
-          return 'has-text-info'
-
-        default :
-          return 'has-text-success'
-      }
     }
   }
 }

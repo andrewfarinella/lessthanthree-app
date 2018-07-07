@@ -1,18 +1,18 @@
 <template>
   <div>
     <section class="section">
-      <div class="box">
+      <div class="box has-background-black-ter">
         <div class="columns">
           <div class="column is-6">
             <div class="field">
-              <label for="" class="label">Name</label>
+              <label for="" class="label has-text-white">Name</label>
               <input type="text" class="input" v-model="values.name">
             </div>
           </div>
           <div class="column is-6">
             <img v-if="preview" :src="preview" alt="">
             <div class="field">
-              <label for="" class="label">Banner Image URL</label>
+              <label for="" class="label has-text-white">Banner Image URL</label>
               <input type="text" class="input" v-model="values.banner">
             </div>
             <button class="button is-info" @click="updatePreview">Update Preview</button>

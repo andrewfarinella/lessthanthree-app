@@ -37,6 +37,7 @@ mutation CreateUserQuery($user: UserInput!) {
     name
     first_name
     last_name
+    picture
   }
 }`
 
@@ -81,6 +82,7 @@ query GameQuery($id: ID!) {
           name
           first_name
           last_name
+          picture
         }
         value
       }

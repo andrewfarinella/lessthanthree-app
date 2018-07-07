@@ -1,9 +1,9 @@
 <template>
   <section>
-    <div class="box" v-if="profile">
+    <div class="box has-background-black-ter has-text-white" v-if="profile">
       <div class="columns">
         <div class="column is-6">
-          <h2 class="title">About me</h2>
+          <h2 class="title has-text-white">About me</h2>
         </div>
         <div v-if="isMe" class="column is-6 has-text-right">
           <button class="button is-info">
@@ -18,7 +18,7 @@
       </div>
       <div class="columns">
         <div class="column is-6">
-          <label for="" class="label">Name</label>
+          <label for="" class="label has-text-white">Name</label>
           {{ profile.first_name }} {{ profile.last_name }}
         </div>
         <div class="column is-6">
@@ -27,18 +27,18 @@
       </div>
     </div>
 
-    <div class="box" v-if="votesByUser && votesByUser.length">
-      <h2 class="title">My votes</h2>
+    <div class="box has-background-black-ter" v-if="votesByUser && votesByUser.length">
+      <h2 class="title has-text-white">My votes</h2>
       <div class="columns">
         <div v-for="game in votesByUser" :key="game._id" class="column is-4">
           <div class="card">
-            <div class="card-header" :style="'background-image: url(\'' + game.banner + '\')'">
-              <p class="card-header-title">{{ game.name }}</p>
+            <div class="card-header has-background-black-ter" :style="'background-image: url(\'' + game.banner + '\')'">
+              <p class="card-header-title has-text-white">{{ game.name }}</p>
             </div>
-            <div class="card-content">
+            <div class="card-content has-background-white-ter">
               <table class="table is-fullwidth">
                 <tbody v-for="rating in game.ratings" :key="rating._id">
-                  <tr v-for="vote in rating.votes" :key="vote._id">
+                  <tr v-for="vote in rating.votes" :key="vote._id" class="has-background-white-ter">
                     <td>
                       {{ rating.name }}
                     </td>
@@ -109,6 +109,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.card {
+  overflow: hidden;
+  border-radius: 5px;
+}
 .card-header {
   position: relative;
   z-index: 1;
@@ -124,7 +128,7 @@ export default {
     bottom: 0;
     left: 0;
     z-index: -1;
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.9) 0%, white 100%);
+    background: linear-gradient(180deg, rgba(22, 22, 22, 0.5) 0%, rgba(22, 22, 22, 0.7) 80%, rgba(22, 22, 22, 1) 100%);
   }
 }
 </style>
